@@ -2,17 +2,17 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 
-import { IUser, UserModel } from '../../models/User';
+import {
+	IUser,
+	RequestWithUser,
+	UserIDJwtPayload,
+	UserModel,
+} from '../../types/User';
+import Config from '../../config/config';
 
 const User = mongoose.model<IUser, UserModel>('User');
 
-interface UserIDJwtPayload extends jwt.JwtPayload {
-	userId: string;
-}
-
-export interface RequestWithUser extends Request {
-	user: IUser;
-}
+const secretKet = Config.getInstance().params.SecretKey;
 
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
 	const { authorization } = req.headers;
@@ -22,7 +22,7 @@ const requireAuth = (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	const token = authorization.replace('Bearer ', '');
-	jwt.verify(token, process.env.DEV_SECRET_KEY!, async (err, payload) => {
+	jwt.verify(token, secretKet, async (err, payload) => {
 		if (err) {
 			return res.status(401).send({ error: 'You must be log in' });
 		}

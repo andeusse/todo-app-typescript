@@ -1,10 +1,9 @@
 import { Request, Response, Router } from 'express';
 import mongoose, { Error } from 'mongoose';
 
-import requireAuth, {
-	RequestWithUser,
-} from '../middlewares/requireAuthHandler/RequireAuthHandlerMiddleware';
-import { ITodoItem, RequestWithUserTodo } from '../models/TodoItem';
+import requireAuth from '../middlewares/requireAuthHandler/RequireAuthHandlerMiddleware';
+import { ITodoItem, RequestWithUserTodo } from '../types/Todo';
+import { RequestWithUser } from '../types/User';
 
 const TodoItem = mongoose.model<ITodoItem>('TodoItem');
 
@@ -12,18 +11,18 @@ const router = Router();
 
 router.use(requireAuth);
 
-router.get('/todo', async (req: Request, res: Response) => {
+router.get('/todos', async (req: Request, res: Response) => {
 	const user = (<RequestWithUser>req).user;
 	const todos = await TodoItem.find({ userId: user._id });
-	res.status(200).send({ todos });
+	return res.status(200).send(todos);
 });
 
-router.post('/todo', async (req: Request, res: Response) => {
+router.post('/todos', async (req: Request, res: Response) => {
 	const user = (<RequestWithUserTodo>req).user;
 	const { description, startDate } = (<RequestWithUserTodo>req).body;
 
 	if (!description || !startDate) {
-		res.send({ message: 'Description and start date are mandatory' });
+		return res.send({ message: 'Description and start date are mandatory' });
 	}
 
 	const todo = new TodoItem({
@@ -35,11 +34,44 @@ router.post('/todo', async (req: Request, res: Response) => {
 	todo
 		.save()
 		.then(() => {
-			res.send({ todo });
+			return res.status(200).send({ todo });
 		})
 		.catch((err: Error) => {
-			res.status(500).send({ message: err.message });
+			return res.status(500).send({ message: err.message });
 		});
+});
+
+router.put('/todos/:id', async (req: Request, res: Response) => {
+	const { id } = req.params;
+	const update = req.body;
+
+	if (id) {
+		TodoItem.findByIdAndUpdate(id, update)
+			.then(() => {
+				return res.status(200).send({ message: 'Item updated' });
+			})
+			.catch(() => {
+				return res.status(404).send({ message: 'Item not updated, try again' });
+			});
+	} else {
+		return res.status(404).send({ message: 'Must include an id' });
+	}
+});
+
+router.delete('/todos/:id', async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	if (id) {
+		TodoItem.findByIdAndRemove(id)
+			.then(() => {
+				return res.status(200).send({ message: 'Item deleted' });
+			})
+			.catch(() => {
+				return res.status(404).send({ message: 'Item not removed, try again' });
+			});
+	} else {
+		return res.status(404).send({ message: 'Must include an id' });
+	}
 });
 
 export default router;

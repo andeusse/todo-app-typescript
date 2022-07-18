@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 export class MongoDB {
-	static instance: MongoDB;
+	private static instance: MongoDB;
 
-	constructor(public mongoUri: string = '') {
+	private constructor(public mongoUri: string = '') {
 		mongoose.connection.on('connected', () => {
 			console.log('Connected to mongoDB instance');
 		});

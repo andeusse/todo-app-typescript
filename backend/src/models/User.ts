@@ -1,18 +1,6 @@
-import mongoose, { Error, Model } from 'mongoose';
+import mongoose, { Error } from 'mongoose';
 import bcrypt from 'bcrypt';
-
-export interface IUser {
-	_id: mongoose.Schema.Types.ObjectId;
-	email: string;
-	name: string;
-	password: string;
-}
-
-interface IUserMethods {
-	comparePassword(candidatePassword: string): Promise<Error | boolean>;
-}
-
-export type UserModel = Model<IUser, {}, IUserMethods>;
+import { IUser, IUserMethods, UserModel } from '../types/User';
 
 const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>({
 	email: {

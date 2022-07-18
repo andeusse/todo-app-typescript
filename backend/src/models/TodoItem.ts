@@ -1,15 +1,5 @@
-import mongoose, { ObjectId } from 'mongoose';
-import { RequestWithUser } from '../middlewares/requireAuthHandler/RequireAuthHandlerMiddleware';
-
-export interface ITodoItem {
-	userId: ObjectId;
-	description: string;
-	startDate: Date;
-	endDate: Date;
-	isFinished: boolean;
-}
-
-export type RequestWithUserTodo = ITodoItem & RequestWithUser;
+import mongoose from 'mongoose';
+import { ITodoItem } from '../types/Todo';
 
 const todoItemSchema = new mongoose.Schema<ITodoItem>({
 	userId: {
