@@ -7,6 +7,7 @@ import LogoutView from '../views/LogoutView';
 
 import { MainView } from '../views/MainView';
 import ModifyTodoView from '../views/ModifyTodoView';
+import NotFoundView from '../views/NotFoundView';
 import SigninView from '../views/SigninView';
 import SignupView from '../views/SignupView';
 
@@ -65,6 +66,7 @@ const Router = () => {
 				{!user && <Route path="/signup" element={<SignupView />} />}
 				{user && <Route path="/modifyTodo" element={<ModifyTodoView />} />}
 				{user && <Route path="/logout" element={<LogoutView />} />}
+				<Route path="/*" element={<NotFoundView />} />
 			</Routes>
 		</React.Fragment>
 	);

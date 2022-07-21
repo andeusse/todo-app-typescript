@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "c5f0f986-3b60-4db9-97fc-b163394cb238",
+		"name": "API TodoApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11147150"
+	},
+	"item": [
+		{
+			"name": "Server Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/status/server",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"status",
+						"server"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MongoDB Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/status/mongo",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"status",
+						"mongo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"email\": \"email@email.com\",\r\n     \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/signin",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"password\",\r\n    \"name\": \"Andrés Eusse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Autho}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/todos/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"todos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Autho}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Todo 3 nuevo\",\r\n    \"startDate\": 1552261496289\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/todos/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"todos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Autho}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/todos/62cedaf39d90dfee5cff88ed",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"todos",
+						"62cedaf39d90dfee5cff88ed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Autho}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Todo 1\",\r\n    \"startDate\": 1552261496289,\r\n    \"isFinished\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/todos/62cdec4e80e2ce2da415f783",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"todos",
+						"62cdec4e80e2ce2da415f783"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Autho",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmNkOTg0MzU0YTFiYTMyMWFlZGI5YWIiLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsIm5hbWUiOiJBbmRyw6lzIEV1c3NlIiwiaWF0IjoxNjU3NjU0ODMxfQ.r941tv27Ev-7-iKcYL327LdmSjeb6_OD4UNUmVVpKCg"
+		}
+	]
+}

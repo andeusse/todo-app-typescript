@@ -8,7 +8,7 @@ import {
 	UserIDJwtPayload,
 	UserModel,
 } from '../../types/User';
-import Config from '../../config/config';
+import Config from '../../config/Config';
 
 const User = mongoose.model<IUser, UserModel>('User');
 

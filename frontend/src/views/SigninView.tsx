@@ -11,7 +11,7 @@ import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
-import { signin } from '../controllers/user';
+import { signin } from '../api/user';
 import { ErrorMessage } from '../types/Error';
 import { SigninUser } from '../types/User';
 

@@ -53,7 +53,6 @@ const AddTodoItem = (props: Props) => {
 					label="Description"
 					multiline
 					rows={5}
-					maxRows={10}
 					value={todo.description}
 					onChange={(e) => propertyChangeHandler(e, 'description')}
 				/>
@@ -66,8 +65,13 @@ const AddTodoItem = (props: Props) => {
 				<Button
 					variant="contained"
 					startIcon={<AddCircleIcon />}
+					disabled={todo.description === ''}
 					onClick={() => {
 						addTodo(todo);
+						setTodo({
+							description: '',
+							startDate: new Date(),
+						});
 					}}
 				>
 					Add

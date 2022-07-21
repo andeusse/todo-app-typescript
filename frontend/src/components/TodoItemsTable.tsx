@@ -13,11 +13,14 @@ import { GetTodoItem } from '../types/TodoItem';
 
 type Props = {
 	todoItems: GetTodoItem[];
+	deleteItem: (id: string) => void;
+	updateItem: (id: GetTodoItem) => void;
+	setOpen: (open: boolean) => void;
 };
 
 const TodoItemsTable = (props: Props) => {
-	const { todoItems } = props;
-	console.log(todoItems);
+	const { todoItems, deleteItem, updateItem, setOpen } = props;
+
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -32,7 +35,15 @@ const TodoItemsTable = (props: Props) => {
 				</TableHead>
 				<TableBody>
 					{todoItems.map((todoItem) => {
-						return <TodoItem todoItem={todoItem}></TodoItem>;
+						return (
+							<TodoItem
+								key={todoItem._id}
+								todoItem={todoItem}
+								deleteItem={deleteItem}
+								updateItem={updateItem}
+								setOpen={setOpen}
+							></TodoItem>
+						);
 					})}
 				</TableBody>
 			</Table>

@@ -12,7 +12,7 @@ import { handleError } from './middlewares/errorHandler/ErrorHandlerMiddleware';
 import authRoutes from './routes/authRoutes';
 import statusRoutes from './routes/statusRoutes';
 import todoRoutes from './routes/todoRoutes';
-import Config from './config/config';
+import Config from './config/Config';
 
 const app: Express = express();
 const port = Config.getInstance().params.Port;

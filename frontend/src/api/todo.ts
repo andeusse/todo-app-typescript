@@ -1,5 +1,5 @@
-import { todoApi } from '../api/todoApi';
-import { PostTodoItem, PutTodoItem } from '../types/TodoItem';
+import { todoApi } from './todoApi';
+import { PostTodoItem, GetTodoItem } from '../types/TodoItem';
 
 export const getTodoItems = (token: string) => {
 	return todoApi.get('/todos', {
@@ -19,12 +19,8 @@ export const deleteTodoItem = (id: string, token: string) => {
 	});
 };
 
-export const updateTodoItem = (
-	id: string,
-	data: PutTodoItem,
-	token: string
-) => {
-	return todoApi.put(`/todos/${id}`, data, {
+export const updateTodoItem = (data: GetTodoItem, token: string) => {
+	return todoApi.put(`/todos/${data._id}`, data, {
 		headers: { Authorization: `Bearer ${token}` },
 	});
 };
