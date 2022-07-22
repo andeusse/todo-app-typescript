@@ -91,6 +91,9 @@ const SignupView = () => {
 					<Button variant="contained" onClick={onRegisterClickHandler}>
 						Register
 					</Button>
+					<Button variant="text" onClick={() => navigate('/signin')}>
+						Already have an account?
+					</Button>
 				</Stack>
 			</Container>
 		</FormGroup>

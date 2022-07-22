@@ -38,17 +38,9 @@ const Router = () => {
 						to="/signin"
 						sx={{
 							position: 'absolute',
-							right: '102.5px',
+							right: '0px',
 							textAlign: 'right',
 						}}
-					/>
-				)}
-				{!user && (
-					<Tab
-						component={Link}
-						label="Signup"
-						to="/signup"
-						sx={{ position: 'absolute', right: '0', textAlign: 'right' }}
 					/>
 				)}
 				{user && (
