@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Modal, Stack, TextField } from '@mui/material';
+import { Box, Button, Checkbox, Modal, Stack, TextField } from '@mui/material';
 import { Close, Save } from '@mui/icons-material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { GetTodoItem } from '../types/TodoItem';
@@ -70,6 +70,18 @@ const UpdateTodoItemModal = (props: Props) => {
 		}
 	};
 
+	const onCheckedChangeHandler = () => {
+		let endDate: Date | undefined = undefined;
+		if (!cloneTodoItem?.isFinished) {
+			endDate = new Date();
+		}
+		setCloneTodoItem((old) => {
+			if (old) {
+				return { ...old, isFinished: !old.isFinished, endDate: endDate };
+			}
+		});
+	};
+
 	return (
 		<React.Fragment>
 			{cloneTodoItem && (
@@ -99,12 +111,19 @@ const UpdateTodoItemModal = (props: Props) => {
 									onChange={(value) => handleDateChange(value, 'startDate')}
 									renderInput={(params) => <TextField {...params} />}
 								/>
-								<DateTimePicker
-									label="Start Date"
-									value={cloneTodoItem.endDate}
-									onChange={(value) => handleDateChange(value, 'endDate')}
-									renderInput={(params) => <TextField {...params} />}
-								/>
+								{cloneTodoItem.isFinished && (
+									<DateTimePicker
+										label="End Date"
+										value={cloneTodoItem.endDate}
+										onChange={(value) => handleDateChange(value, 'endDate')}
+										renderInput={(params) => <TextField {...params} />}
+									/>
+								)}
+								<Checkbox
+									size="medium"
+									checked={cloneTodoItem.isFinished}
+									onClick={onCheckedChangeHandler}
+								></Checkbox>
 								<Button
 									variant="contained"
 									startIcon={<Save />}
